@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Context-Aware Q&A Assistant</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+  <header>
+    <h1>Context-Aware Q&amp;A Assistant</h1>
+    <p>Answers come only from the company documents. If it isn’t in there, you’ll be told.</p>
+  </header>
+
+  <section class="chips" aria-label="Example questions">
+    <span class="chips-label">Try:</span>
+    <button class="chip" data-q="Can employees carry forward more than 10 days of leave?">Carry forward leave</button>
+    <!-- <button class="chip" data-q="What is the maximum hotel rate per night in London?">Hotel cap London</button> -->
+    <button class="chip" data-q="How many days of bereavement leave do employees get?">Bereavement leave <em>(not in docs)</em></button>
+    <button class="chip" data-q="What is the capital of France?">Capital of France <em>(not in docs)</em></button>
+  </section>
+
+  <section id="log" class="log" aria-live="polite"></section>
+
+  <form id="form" class="ask">
+    <input id="q" type="text" placeholder="Ask about leave, remote work, expenses, IT security…" maxlength="500" autocomplete="off" required>
+    <button id="send" type="submit">Ask</button>
+  </form>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
