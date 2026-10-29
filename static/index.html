@@ -3,23 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Context-Aware Q&A Assistant</title>
+<title>GEOGO Policy Q&amp;A</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="layout">
+<aside class="context" aria-label="Knowledge base">
+  <div class="tabs" role="tablist">
+    <button class="tab active" data-tab="topics" type="button">Topics</button>
+    <button class="tab" data-tab="ctx" type="button">Retrieved context</button>
+  </div>
+  <div id="pane-topics" class="pane">
+    <p class="hint">Browse the documents and click a question to ask it.</p>
+    <div id="kb"><p class="ctx-empty">Loading…</p></div>
+  </div>
+  <div id="pane-ctx" class="pane" hidden>
+    <p class="hint">Passages sent to the model for the latest question. Green = used in the answer.</p>
+    <div id="ctx"><p class="ctx-empty">Ask a question to see which passages are retrieved.</p></div>
+  </div>
+</aside>
 <main class="app">
   <header>
-    <h1>Context-Aware Q&amp;A Assistant</h1>
+    <h1>GEOGO Policy Q&amp;A</h1>
     <p>Answers come only from the company documents. If it isn’t in there, you’ll be told.</p>
   </header>
-
-  <section class="chips" aria-label="Example questions">
-    <span class="chips-label">Try:</span>
-    <button class="chip" data-q="Can employees carry forward more than 10 days of leave?">Carry forward leave</button>
-    <!-- <button class="chip" data-q="What is the maximum hotel rate per night in London?">Hotel cap London</button> -->
-    <button class="chip" data-q="How many days of bereavement leave do employees get?">Bereavement leave <em>(not in docs)</em></button>
-    <button class="chip" data-q="What is the capital of France?">Capital of France <em>(not in docs)</em></button>
-  </section>
 
   <section id="log" class="log" aria-live="polite"></section>
 
@@ -28,6 +35,7 @@
     <button id="send" type="submit">Ask</button>
   </form>
 </main>
+</div>
 <script src="app.js"></script>
 </body>
 </html>

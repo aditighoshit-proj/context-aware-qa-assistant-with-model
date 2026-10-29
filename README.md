@@ -4,7 +4,7 @@ Answers questions **only** from the files in `kb/`. If the answer isn't there, i
 LLM: `nvidia/nemotron-3.5-super-vl-120b-a12b` via NVIDIA's OpenAI-compatible API.
 
 ## How it works
-1. **Load**: every `kb/*.md` is split into section-level chunks (`## Heading` = one chunk), tagged `file > section`.
+1. **Load**: every `kb/*.md` is split into section-level chunks (`## Heading` = one chunk), tagged `file > section`. Each document also gets an `Overview` chunk (its title, e.g. "Acme PVT LTD Leave Policy", and its section names) so questions like "which policy do we follow?" can be answered. The document title is also shown to the model with every passage.
 2. **Retrieve**: BM25 (pure Python, no vector DB) returns the top 4 chunks. If *nothing* overlaps the question, the LLM is skipped and the "not found" answer is returned.
 3. **Answer**: the chunks are sent to Nemotron as numbered context with a strict system prompt. The model returns JSON: `{"answerable": bool, "answer": str, "sources": [ids]}`.
 4. **Guard**: if `answerable` is false, the answer is replaced with a fixed message: *"I couldn't find this in the provided documents."* Source ids are validated against the chunks actually sent.
@@ -17,10 +17,10 @@ LLM: `nvidia/nemotron-3.5-super-vl-120b-a12b` via NVIDIA's OpenAI-compatible API
 - Numbered, labelled passages (`[1] source: leave_policy.md > Annual Leave`) enable citations.
 
 ## Frontend
-Plain HTML/CSS/JS in `static/` (no framework, light/dark mode). `server.py` (stdlib only) serves it and exposes `POST /api/ask`, so the API key never reaches the browser. Answers show a green "Answer" card or an amber "Not in the documents" card, with source chips and the passages sent to the model.
+Plain HTML/CSS/JS in `static/` (no framework, light/dark mode). `server.py` (stdlib only) serves it and exposes `POST /api/ask`, so the API key never reaches the browser. Answers show a green "Answer" card or an amber "Not in the documents" card, with source chips. The left panel has two tabs. **Topics** lists each document (Leave, Remote work, Expenses, IT security) with its sections and clickable sample questions, plus questions that are deliberately not in the docs. **Retrieved context** shows the exact passages sent to the model (text and BM25 score), with the ones the model cited highlighted green.
 
 ## Knowledge base (`kb/`)
-Fictional "Acme Corp" docs: `leave_policy.md`, `remote_work_and_expenses.md`, `it_security_and_conduct.md`.
+Fictional "GEOGO PVT LTD" docs: `leave_policy.md`, `remote_work.md`, `expenses.md`, `it_security_and_conduct.md`.
 
 ## Run
 ```bash

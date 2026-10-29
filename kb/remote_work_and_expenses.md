@@ -1,7 +1,7 @@
-# Acme Corp Remote Work and Expenses Policy
+# GEOGO PVT LTD Remote Work and Expenses Policy
 
 ## Hybrid Work
-Acme Corp follows a hybrid model. Core office days are Tuesday, Wednesday and Thursday. Employees may work remotely on Mondays and Fridays.
+GEOGO PVT LTD follows a hybrid model. Core office days are Tuesday, Wednesday and Thursday. Employees may work remotely on Mondays and Fridays.
 Core working hours are 10:00 to 16:00 in the employee's local time.
 Fully remote arrangements require director approval and are reviewed every 6 months.
 

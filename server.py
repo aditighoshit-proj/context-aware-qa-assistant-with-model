@@ -6,7 +6,20 @@ import qa
 
 STATIC = (Path(__file__).parent / "static").resolve()
 TYPES = {".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".js": "text/javascript; charset=utf-8"}
+ROOT = Path(__file__).parent
 client = qa.get_client()
+
+def kb_overview():
+    """Documents, their sections, and the sample questions from questions.json."""
+    qs = json.loads((ROOT / "questions.json").read_text())
+    chunks = qa.load_kb()
+    docs = []
+    for p in sorted(qa.KB_DIR.glob("*.md")):
+        title = p.read_text(encoding="utf-8").splitlines()[0].lstrip("# ").replace("GEOGO PVT LTD ", "").strip()
+        docs.append({"file": p.name, "title": title,
+                     "sections": [{"name": c.section, "text": c.text} for c in chunks if c.source == p.name and c.section != "Overview"],
+                     "questions": [q["question"] for q in qs if q.get("source") == p.name]})
+    return {"documents": docs, "not_in_docs": [q["question"] for q in qs if not q["answerable"]]}
 
 class Handler(BaseHTTPRequestHandler):
     def _send(self, code, body, ctype):
@@ -20,6 +33,8 @@ class Handler(BaseHTTPRequestHandler):
         self._send(code, json.dumps(obj).encode(), "application/json")
 
     def do_GET(self):
+        if self.path == "/api/kb":
+            return self._json(200, kb_overview())
         name = "index.html" if self.path in ("/", "") else self.path.split("?")[0].lstrip("/")
         f = (STATIC / name).resolve()
         if STATIC not in f.parents or not f.is_file():

@@ -1,4 +1,4 @@
-# Acme Corp Leave Policy
+# GEOGO PVT LTD Leave Policy
 
 ## Annual Leave
 Full-time employees receive 24 days of paid annual leave per calendar year. Leave accrues monthly at 2 days per month.
@@ -22,7 +22,7 @@ Maternity leave is 26 weeks of fully paid leave. Paternity leave is 4 weeks of f
 Adoptive parents receive 12 weeks of paid leave.
 
 ## Public Holidays
-Acme Corp observes 10 public holidays per year. HR publishes the list each December.
+GEOGO PVT LTD observes 10 public holidays per year. HR publishes the list each December.
 An employee who works on a public holiday earns a compensatory day off, which must be taken within 60 days.
 
 ## Unpaid Leave
